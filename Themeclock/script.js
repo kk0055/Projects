@@ -36,7 +36,7 @@ function setTime() {
 
   timeEl.innerHTML = `${hoursForClock}:${minutes < 10 ? `0${minutes}` : minutes} ${ampm}`
   dateEl.innerHTML = `${days[day]}, ${months[month]} <span class="circle">${date}</span>`
-  console.log(hoursForClock)
+ 
 }
 
 const scale = (num, in_min, in_max, out_min, out_max) => {
