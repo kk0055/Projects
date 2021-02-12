@@ -25,17 +25,15 @@ html.dark {
 
 
 body {
-  background-color: #686de0;
-  color:#fff;
   font-family: 'Heebo', sans-serif;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   overflow: hidden;
   margin: 0;
 }
+
 
 .toggle {
   cursor: pointer;
@@ -45,7 +43,7 @@ body {
   border-radius: 4px;
   padding: 8px 12px;
   position: absolute;
-  top: 100px;
+  top: 50px;
 }
 
 .toggle:focus {
