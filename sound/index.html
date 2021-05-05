@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title></title>
+  </head>
+  <body>
+    <div class="body">
+      <header>  <input type="button"  value="▶︎" class="btn"> ←テキスト読み上ボタン
+      </header>
+      <section id="speech">
+      <h1>テキスト読み上げテスト</h1>
+      <p>うまくいけばここのテキストが再生される。たぶんされると思う。されるんじゃないかな。まちょと覚悟はしておけ。</p>
+        <section>
+        <h2>ルビ</h2>
+        <p>生ゴミ生ゴメ生タマゴ</p>
+        <p><ruby>生<rp>(</rp><rt>ナマ</rt><rp>)</rp></ruby>ゴミ<ruby>生<rp>(</rp><rt>ナマ</rt><rp>)</rp></ruby>ゴメ<ruby>生<rp>(</rp><rt>ナマ</rt><rp>)</rp></ruby>タマゴ</p>
+        <p>※読み間違えたまま二重で読まれる。</p>
+        </section>
+        <section>
+        <h2>リスト</h2>
+        <ul>
+          <li>ラオウ</li>
+          <li>トキ</li>
+          <li>ジャギ</li>
+          <li>ケンシロウ</li>
+          </ul>
+          <p>※リスト間は間髪なく読まれる。</p>
+        </section>
+        <section>
+        <h2>テーブル</h2>
+          <table>
+          <tr>
+            <th>姓</th><th>名</th>
+          </tr>
+          <tr>
+            <td>山田</td><td>太郎</td>
+          </tr>
+          <tr>
+            <td>山田</td><td>次郎</td>
+          </tr>
+          <tr>
+            <td>山田</td><td>三郎</td>
+          </tr>
+        </table>
+            <p>※一行ずつ左から右に読まれる。</p>
+        </section>
+        <section>
+        <h2>画像</h2>
+        <figure> <img src="http://placehold.jp/300x200.png" alt="画像の説明文">
+          <figcaption>画像のキャプション</figcaption>
+          </figure>
+        <p>※alt属性は読まれない。</p>
+        </section>
+        <section>
+        <h2>ウィジェット埋め込み</h2>
+        <a class="twitter-timeline" data-width="300" data-height="500" data-dnt="true" href="https://twitter.com/Twitter?ref_src=twsrc%5Etfw">Tweets by Twitter</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <p>※アカウント名しか読まれない</p>
+        </section>
+        </section>
+      </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

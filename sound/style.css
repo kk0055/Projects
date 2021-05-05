@@ -1,0 +1,72 @@
+.body {
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #eee;
+}
+
+header {
+  background: #eee;
+  padding: 30px;
+}
+
+.btn {
+  padding: 10px;
+  background: #ccc;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  opacity: .7;
+  cursor: pointer;
+}
+
+#speech {
+    padding: 30px;
+}
+
+h1,h2 {
+  font-weight: bold;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+h1 {
+  font-size: 35px;
+  margin: 0 0 20px;
+}
+
+h2 {
+  font-size: 25px;
+  margin: 40px 0 20px;
+}
+
+p {
+  line-height: 1.75;
+  margin: 0 0 20px;
+}
+
+ul, table, figure {
+  margin: 20px 0;
+}
+
+li {
+  list-style: disc;
+  margin: 0 0 20px 1em;
+}
+
+th,td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+th {
+  background: #eee;
+}
+
+figure {
+  margin: 0 0 20px;
+}
+
+figure img {
+  margin: 0 0 10px;
+}
