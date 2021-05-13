@@ -60,4 +60,33 @@ const contactState = function(page) {
   `;
 };
 
-//
+// Instantiate pageState
+const page = new PageState();
+
+page.init();
+
+
+const  home = document.getElementById('home'),
+       about = document.getElementById('about'),
+       contact = document.getElementById('contact');
+
+//Home
+home.addEventListener('click', (e) => {
+  page.change(new homeState);
+
+  e.preventDefault();
+});
+
+//About
+about.addEventListener('click', (e) => {
+  page.change(new aboutState);
+
+  e.preventDefault();
+});
+
+//About
+contact.addEventListener('click', (e) => {
+  page.change(new contactState);
+
+  e.preventDefault();
+})
