@@ -34,7 +34,13 @@ const ItemCtrl = (function(){
 
 //UI Controller
 const UICtrl = (function(){
-  
+
+  const UISelectors = {
+    itemList: '#item-list',
+    addBtn: '.add-btn',
+    itemNameInput: '#item-name',
+    itemCaloriesInput:'#item-calories'
+  }
   //Publicメソッド
   return {
     populateItemList: function(items){
@@ -50,7 +56,16 @@ const UICtrl = (function(){
       });
 
       // Insert list items
-      document.querySelector('#item-list').innerHTML = html;
+      document.querySelector(UISelectors.itemList).innerHTML = html;
+    },
+    getItemInput: function(){
+     return {
+       name: '',
+       calories:''
+     }
+    },
+    getSelectors: function(){
+      return UISelectors;
     }
   }
 })();
@@ -58,6 +73,21 @@ const UICtrl = (function(){
 
 //App Controller
 const App = (function(ItemCtrl, UICtrl){
+ //Load event listners
+ const loadEventListners = function(){
+  const UISelectors = UICtrl.getSelectors();
+ 
+  //Add item event
+  document.querySelector(UISelectors.addBtn).addEventListener('click',itemAddSubmit);
+ }
+
+ //Add item submit
+ const itemAddSubmit = function(e){
+   //Get for input from UI controller
+   const input = UICtrl.getItemInput
+  e.preventDefault();
+  
+ }
 
    //Publicメソッド
   return {
@@ -68,6 +98,9 @@ const App = (function(ItemCtrl, UICtrl){
 
       //populate list with items
       UICtrl.populateItemList(items);
+
+      //Load event listners
+      loadEventListners()
     }
   }
   
