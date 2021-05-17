@@ -11,9 +11,9 @@ const ItemCtrl = (function(){
 
   const data  = {
     items: [
-      {id:0, name: 'Steak dinner', calories:1200},
-      {id:1, name: 'Sushi', calories:500},
-      {id:2, name: 'Gyoza', calories:600}
+      // {id:0, name: 'Steak dinner', calories:1200},
+      // {id:1, name: 'Sushi', calories:500},
+      // {id:2, name: 'Gyoza', calories:600}
     ],
     currentItem: null,
     totalCalories: 0
@@ -68,7 +68,7 @@ const UICtrl = (function(){
       let html = '';
 
       items.forEach(function(item){
-        html += `<li class="collection-item" id="items-${item.id}">
+        html += `<li class="collection-item" id="item-${item.id}">
         <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
         <a href="#" class="secondary-content">
           <i class="edit-item fa fa-pencil"></i>
@@ -86,16 +86,27 @@ const UICtrl = (function(){
      }
     },
     addListItem: function(item){
+      
+      //SHow the list
+      document.querySelector(UISelectors.itemList).style.display = 'block';
+
       const li = document.createElement('li');
-      li.className = 'collection-item',
+      li.className = 'collection-item';
       li.id = `item-${item.id}`;
       li.innerHTML = ` <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
       <a href="#" class="secondary-content">
         <i class="edit-item fa fa-pencil"></i>
       </a>`;
 
-      //inset item
+      //insert item
       document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
+    },
+    clearInput: function(){
+        document.querySelector(UISelectors.itemNameInput).value = '';
+        document.querySelector(UISelectors.itemCaloriesInput).value = '';
+    },
+    hideList: function(){
+      document.querySelector(UISelectors.itemList).style.display = "none";
     },
     getSelectors: function(){
       return UISelectors;
@@ -107,7 +118,7 @@ const UICtrl = (function(){
 //App Controller
 const App = (function(ItemCtrl, UICtrl){
  //Load event listners
- const loadEventListners = function(){
+ const loadEventListeners  = function(){
   const UISelectors = UICtrl.getSelectors();
  
   //Add item event
@@ -125,6 +136,9 @@ const App = (function(ItemCtrl, UICtrl){
        const newItem =  ItemCtrl.addItem(input.name, input.calories);
        
        UICtrl.addListItem(newItem);
+
+      //clearInput input forms
+      UICtrl.clearInput();
    }
 
   e.preventDefault();
@@ -137,12 +151,20 @@ const App = (function(ItemCtrl, UICtrl){
 
       //Itemsのfetch
       const items = ItemCtrl.getItems();
-
-      //populate list with items
+      
+      //check if any items
+      if(items.length === 0){
+       
+        UICtrl.hideList();
+      }else {
+        //populate list with items
       UICtrl.populateItemList(items);
 
+      }
+
+      
       //Load event listners
-      loadEventListners()
+      loadEventListeners ()
     }
   }
   
