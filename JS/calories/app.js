@@ -74,6 +74,9 @@ const UICtrl = (function(){
   const UISelectors = {
     itemList: '#item-list',
     addBtn: '.add-btn',
+    updateBtn: '.update-btn',
+    deleteBtn: '.delete-btn',
+    backBtn: '.back-btn',
     itemNameInput: '#item-name',
     itemCaloriesInput:'#item-calories',
     totalCalories:'.total-calories',
@@ -126,6 +129,14 @@ const UICtrl = (function(){
     },
     showTotalCalories: function(totalCalories) {
       document.querySelector(UISelectors.totalCalories).textContent = totalCalories ;
+    },
+    clearEditState: function(){
+      UICtrl.clearInput();
+      document.querySelector(UISelectors.updateBtn).style.display = "none";
+      document.querySelector(UISelectors.deleteBtn).style.display = "none";
+      document.querySelector(UISelectors.backBtn).style.display = "none";
+      document.querySelector(UISelectors.addBtn).style.display = "inline";
+
     },
     getSelectors: function(){
       return UISelectors;
@@ -186,6 +197,10 @@ const App = (function(ItemCtrl, UICtrl){
       UICtrl.populateItemList(items);
 
       }
+        //Get total calories
+        const  totalCalories = ItemCtrl.getTotalCalories();
+        //Add totalt calories to UI
+        UICtrl.showTotalCalories(totalCalories);
 
       
       //Load event listners
