@@ -45,6 +45,21 @@ const ItemCtrl = (function(){
 
        return newItem;
     },
+    //get Total Calories
+    getTotalCalories: function(){
+      let total = 0;
+
+      //foreachでitemsをまわしてcalories追加
+      data.items.forEach(function(item){
+        total += item.calories;
+        
+      });
+
+      //set total calories in data structure
+      data.totalCalories = total;
+
+      return data.totalCalories;
+    },
     logData: function() {
       return data;
     }
@@ -60,7 +75,8 @@ const UICtrl = (function(){
     itemList: '#item-list',
     addBtn: '.add-btn',
     itemNameInput: '#item-name',
-    itemCaloriesInput:'#item-calories'
+    itemCaloriesInput:'#item-calories',
+    totalCalories:'.total-calories',
   }
   //Publicメソッド
   return {
@@ -108,6 +124,9 @@ const UICtrl = (function(){
     hideList: function(){
       document.querySelector(UISelectors.itemList).style.display = "none";
     },
+    showTotalCalories: function(totalCalories) {
+      document.querySelector(UISelectors.totalCalories).textContent = totalCalories ;
+    },
     getSelectors: function(){
       return UISelectors;
     }
@@ -132,10 +151,16 @@ const App = (function(ItemCtrl, UICtrl){
    
    //inputがブランクで無い場合
    if(input.name !== '' && input.calories !== ''){
+
      //Add Item
        const newItem =  ItemCtrl.addItem(input.name, input.calories);
-       
+       //Add Items to UI
        UICtrl.addListItem(newItem);
+
+      //Get total calories
+      const  totalCalories = ItemCtrl.getTotalCalories();
+      //Add totalt calories to UI
+      UICtrl.showTotalCalories(totalCalories);
 
       //clearInput input forms
       UICtrl.clearInput();
