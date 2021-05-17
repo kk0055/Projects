@@ -85,6 +85,18 @@ const UICtrl = (function(){
        calories:document.querySelector(UISelectors.itemCaloriesInput).value
      }
     },
+    addListItem: function(item){
+      const li = document.createElement('li');
+      li.className = 'collection-item',
+      li.id = `item-${item.id}`;
+      li.innerHTML = ` <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+      <a href="#" class="secondary-content">
+        <i class="edit-item fa fa-pencil"></i>
+      </a>`;
+
+      //inset item
+      document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
+    },
     getSelectors: function(){
       return UISelectors;
     }
@@ -104,14 +116,15 @@ const App = (function(ItemCtrl, UICtrl){
 
  //Add item submit
  const itemAddSubmit = function(e){
-   //Get for input from UI controller
+   //Get form input from UI controller
    const input = UICtrl.getItemInput();
    
    //inputがブランクで無い場合
    if(input.name !== '' && input.calories !== ''){
      //Add Item
        const newItem =  ItemCtrl.addItem(input.name, input.calories);
-       console.log(newItem)
+       
+       UICtrl.addListItem(newItem);
    }
 
   e.preventDefault();
