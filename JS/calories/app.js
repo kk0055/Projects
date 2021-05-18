@@ -45,6 +45,18 @@ const ItemCtrl = (function(){
 
        return newItem;
     },
+    getItemById:function(id){
+      let found = null;
+      data.items.forEach(function(item){
+        if(item.id === id){
+          found = item;
+        }
+      });
+      return found;    
+    },
+    setCurrentItem: function(item){
+      data.currentItem = item;
+    },
     //get Total Calories
     getTotalCalories: function(){
       let total = 0;
@@ -153,6 +165,9 @@ const App = (function(ItemCtrl, UICtrl){
  
   //Add item event
   document.querySelector(UISelectors.addBtn).addEventListener('click',itemAddSubmit);
+
+   //Edit item click event
+   document.querySelector(UISelectors.itemList).addEventListener('click',itemUdateSubmit);
  }
 
  //Add item submit
@@ -181,10 +196,31 @@ const App = (function(ItemCtrl, UICtrl){
   
  }
 
+ //update item submit
+const itemUdateSubmit = function(e){
+if(e.target.classList.contains('edit-item')){
+ //Get list item id 
+ const listId = e.target.parentNode.parentNode.id;
+
+ //Break into an array
+ const listIdArr = listId.split('-');
+
+ //Get the actual ID
+ const id = parseInt(listIdArr[1]);
+
+ //Get Item
+const itemToEdit = ItemCtrl.getItemById(id);
+
+ItemCtrl.setCurrentItem(itemToEdit);
+}
+  e.preventDefault();
+}
+
    //Publicメソッド
   return {
     init:function(){
-
+      //Clear edit state
+      UICtrl.clearEditState();
       //Itemsのfetch
       const items = ItemCtrl.getItems();
       
