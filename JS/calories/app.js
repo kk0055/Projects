@@ -285,6 +285,13 @@ const itemUpdateSubmit = function(e){
   //Update UI
   UICtrl.updateListItem(updatedItem);
 
+  //Get total calories
+  const  totalCalories = ItemCtrl.getTotalCalories();
+  //Add totalt calories to UI
+  UICtrl.showTotalCalories(totalCalories);
+
+  UICtrl.clearEditState();
+
   e.preventDefault();
 }
    //Publicメソッド
