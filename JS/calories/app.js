@@ -142,6 +142,7 @@ const UICtrl = (function(){
     addItemToForm:function(){
       document.querySelector(UISelectors.itemNameInput).value = ItemCtrl.getCurrentItem().name;
       document.querySelector(UISelectors.itemCaloriesInput).value = ItemCtrl.getCurrentItem().calories;
+      UICtrl.showEditState();
     },
     hideList: function(){
       document.querySelector(UISelectors.itemList).style.display = "none";
@@ -155,7 +156,12 @@ const UICtrl = (function(){
       document.querySelector(UISelectors.deleteBtn).style.display = "none";
       document.querySelector(UISelectors.backBtn).style.display = "none";
       document.querySelector(UISelectors.addBtn).style.display = "inline";
-
+    },
+    showEditState: function(){
+      document.querySelector(UISelectors.updateBtn).style.display = "inline";
+      document.querySelector(UISelectors.deleteBtn).style.display = "inline";
+      document.querySelector(UISelectors.backBtn).style.display = "inline";
+      document.querySelector(UISelectors.addBtn).style.display = "none";
     },
     getSelectors: function(){
       return UISelectors;
@@ -173,8 +179,17 @@ const App = (function(ItemCtrl, UICtrl){
   //Add item event
   document.querySelector(UISelectors.addBtn).addEventListener('click',itemAddSubmit);
 
+  //Disable submit on enter
+  document.addEventListener('keypress', function(e){
+    if(e.keyCode ===13 || e.which === 13){
+     e.preventDefault();
+     return false;
+    }
+  });
    //Edit item click event
-   document.querySelector(UISelectors.itemList).addEventListener('click',itemUdateSubmit);
+   document.querySelector(UISelectors.itemList).addEventListener('click',itemEditClick);
+   //Update item event
+   document.querySelector(UISelectors.updateBtn).addEventListener('click',itemUpdateSubmit);
  }
 
  //Add item submit
@@ -203,8 +218,8 @@ const App = (function(ItemCtrl, UICtrl){
   
  }
 
- //update item submit
-const itemUdateSubmit = function(e){
+ //cliick edit item
+const itemEditClick = function(e){
 if(e.target.classList.contains('edit-item')){
  //Get list item id 
  const listId = e.target.parentNode.parentNode.id;
@@ -225,7 +240,11 @@ UICtrl.addItemToForm();
 }
   e.preventDefault();
 }
+//Update item submit
+const itemUpdateSubmit = function(e){
 
+  e.preventDefault();
+}
    //Publicメソッド
   return {
     init:function(){
