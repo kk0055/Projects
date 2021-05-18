@@ -2,99 +2,99 @@
 
 //Item Controller
 const ItemCtrl = (function(){
-  //Item Constructor
-  const Item = function(id, name, calories){
-     this.id = id;
-     this.name = name;
-     this.calories = calories
-  }
-
-  const data  = {
-    items: [
-      // {id:0, name: 'Steak dinner', calories:1200},
-      // {id:1, name: 'Sushi', calories:500},
-      // {id:2, name: 'Gyoza', calories:600}
-    ],
-    currentItem: null,
-    totalCalories: 0
-  }
-
- //Publicメソッド
-  return {
-    getItems: function() {
-      return data.items;
-    },
-    addItem: function(name, calories) {
-      
-      let ID;
-      //Create ID
-      if(data.items.length > 0){
-        ID = data.items[data.items.length - 1].id + 1;  
-      } else {
-        ID = 0;
-      }
-
-      //Calories to number
-       calories = parseInt(calories);
-
-       //Crate new item
-       newItem = new Item(ID, name, calories);
-
-       // Add to items array
-       data.items.push(newItem);
-
-       return newItem;
-    },
-    getItemById:function(id){
-      let found = null;
-      data.items.forEach(function(item){
-        if(item.id === id){
-          found = item;
-        }
-      });
-      return found;    
-    },
-    updateItem: function(name, calories){
-      //Calories to number
-      calories = parseInt(calories);
-
-      let found = null;
-
-      data.items.forEach(function(item){
-        if(item.id === data.currentTime.id){
-          item.name = name;
-          item.calories = calories;
-          found = item;
-        }
-      });
-      return found;
-
-    },
-    setCurrentItem: function(item){
-      data.currentItem = item;
-    },
-    getCurrentItem:function(){
-      return data.currentItem;
-    },
-    //get Total Calories
-    getTotalCalories: function(){
-      let total = 0;
-
-      //foreachでitemsをまわしてcalories追加
-      data.items.forEach(function(item){
-        total += item.calories;
-        
-      });
-
-      //set total calories in data structure
-      data.totalCalories = total;
-
-      return data.totalCalories;
-    },
-    logData: function() {
-      return data;
+    //Item Constructor
+    const Item = function(id, name, calories){
+      this.id = id;
+      this.name = name;
+      this.calories = calories
     }
-  }
+
+    const data  = {
+      items: [
+        // {id:0, name: 'Steak dinner', calories:1200},
+        // {id:1, name: 'Sushi', calories:500},
+        // {id:2, name: 'Gyoza', calories:600}
+      ],
+      currentItem: null,
+      totalCalories: 0
+    }
+
+  //Publicメソッド
+    return {
+      getItems: function() {
+        return data.items;
+      },
+      addItem: function(name, calories) {
+        
+        let ID;
+        //Create ID
+        if(data.items.length > 0){
+          ID = data.items[data.items.length - 1].id + 1;  
+        } else {
+          ID = 0;
+        }
+
+        //Calories to number
+        calories = parseInt(calories);
+
+        //Crate new item
+        newItem = new Item(ID, name, calories);
+
+        // Add to items array
+        data.items.push(newItem);
+
+        return newItem;
+      },
+      getItemById:function(id){
+        let found = null;
+        data.items.forEach(function(item){
+          if(item.id === id){
+            found = item;
+          }
+        });
+        return found;    
+      },
+      updateItem: function(name, calories){
+        //Calories to number
+        calories = parseInt(calories);
+
+        let found = null;
+
+        data.items.forEach(function(item){
+          if(item.id === data.currentItem.id){
+            item.name = name;
+            item.calories = calories;
+            found = item;
+          }
+        });
+        return found;
+
+      },
+      setCurrentItem: function(item){
+        data.currentItem = item;
+      },
+      getCurrentItem:function(){
+        return data.currentItem;
+      },
+      //get Total Calories
+      getTotalCalories: function(){
+        let total = 0;
+
+        //foreachでitemsをまわしてcalories追加
+        data.items.forEach(function(item){
+          total += item.calories;
+          
+        });
+
+        //set total calories in data structure
+        data.totalCalories = total;
+
+        return data.totalCalories;
+      },
+      logData: function() {
+        return data;
+      }
+    }
 })();
 
 
@@ -104,6 +104,7 @@ const UICtrl = (function(){
 
   const UISelectors = {
     itemList: '#item-list',
+    listItems:'#item-list li',
     addBtn: '.add-btn',
     updateBtn: '.update-btn',
     deleteBtn: '.delete-btn',
@@ -150,6 +151,22 @@ const UICtrl = (function(){
 
       //insert item
       document.querySelector(UISelectors.itemList).insertAdjacentElement('beforeend', li)
+    },
+    updateListItem:function(item){
+     let listItems = document.querySelectorAll(UISelectors.listItems);
+
+     // Turn Node list into array
+     listItems = Array.from(listItems);
+     listItems.forEach(function(listItem){
+       const itemID = listItem.getAttribute('id');
+
+       if(itemID === `item-${item.id}`){
+         document.querySelector(`#${itemID}`).innerHTML = ` <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+         <a href="#" class="secondary-content">
+           <i class="edit-item fa fa-pencil"></i>
+         </a>`;
+       }
+     });
     },
     clearInput: function(){
         document.querySelector(UISelectors.itemNameInput).value = '';
@@ -263,7 +280,11 @@ const itemUpdateSubmit = function(e){
   const input = UICtrl.getItemInput();
 
   //update item
-  const updateItem = ItemCtrl.updateItem(input.name, input.calories)
+  const updatedItem = ItemCtrl.updateItem(input.name, input.calories);
+
+  //Update UI
+  UICtrl.updateListItem(updatedItem);
+
   e.preventDefault();
 }
    //Publicメソッド
