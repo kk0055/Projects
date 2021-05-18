@@ -70,6 +70,16 @@ const ItemCtrl = (function(){
         return found;
 
       },
+      deleteItem: function(id){
+        //Get ids
+       const ids = data.items.map(function(item){
+          return item.id;
+        });
+        //Get index
+        const index = ids.indexOf(id);
+        //remove item
+        data.items.splice(index, 1);
+      },
       setCurrentItem: function(item){
         data.currentItem = item;
       },
@@ -168,6 +178,11 @@ const UICtrl = (function(){
        }
      });
     },
+    deleteListItem: function(id){
+      const itemID = `#item-${id}`;
+      const item = document.querySelector(itemID);
+      item.remove();
+    },
     clearInput: function(){
         document.querySelector(UISelectors.itemNameInput).value = '';
         document.querySelector(UISelectors.itemCaloriesInput).value = '';
@@ -223,6 +238,12 @@ const App = (function(ItemCtrl, UICtrl){
    document.querySelector(UISelectors.itemList).addEventListener('click',itemEditClick);
    //Update item event
    document.querySelector(UISelectors.updateBtn).addEventListener('click',itemUpdateSubmit);
+
+  //Delete item event
+  document.querySelector(UISelectors.deleteBtn).addEventListener('click',itemDeleteSubmit);
+
+  //Back Btn event
+  document.querySelector(UISelectors.backBtn).addEventListener('click',UICtrl.clearEditState);
  }
 
  //Add item submit
@@ -273,15 +294,15 @@ UICtrl.addItemToForm();
 }
   e.preventDefault();
 }
+
+
 //Update item submit
 const itemUpdateSubmit = function(e){
 
   //Get the item input
   const input = UICtrl.getItemInput();
-
   //update item
   const updatedItem = ItemCtrl.updateItem(input.name, input.calories);
-
   //Update UI
   UICtrl.updateListItem(updatedItem);
 
@@ -289,11 +310,26 @@ const itemUpdateSubmit = function(e){
   const  totalCalories = ItemCtrl.getTotalCalories();
   //Add totalt calories to UI
   UICtrl.showTotalCalories(totalCalories);
-
   UICtrl.clearEditState();
-
   e.preventDefault();
 }
+//Delete button event
+const itemDeleteSubmit = function(e){
+  //Get current item
+  const currentItem = ItemCtrl.getCurrentItem();
+  ItemCtrl.deleteItem(currentItem.id);
+
+  //Delete from UI
+  UICtrl.deleteListItem(currentItem.id);
+  //Get total calories
+  const  totalCalories = ItemCtrl.getTotalCalories();
+  //Add totalt calories to UI
+  UICtrl.showTotalCalories(totalCalories);
+  UICtrl.clearEditState();
+  e.preventDefault();
+}
+
+
    //Publicメソッド
   return {
     init:function(){
