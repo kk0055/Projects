@@ -10,10 +10,10 @@ const StorageCtrl = (function(){
         items = [];
         //push new item
         items.push(item);
-        //set ls
+        //lsにitemsという名前をstringに変えて保存
         localStorage.setItem('items', JSON.stringify(items));
       }else {
-        //LSにすでにあるものを取り出す。
+        //LSにすでにあるものをオブジェクトに変えて取り出す。
         items = JSON.parse(localStorage.getItem('items'));
         //push new item
         items.push(item);
@@ -28,6 +28,16 @@ const StorageCtrl = (function(){
         items = JSON.parse(localStorage.getItem('items'));
       }
       return items;
+    },
+    updateItemStorage : function(updatedItem){
+    let items = JSON.parse(localStorage.getItem('items'));
+    items.forEach(function(item, index){
+      if(updatedItem.id === item.id) {
+        // indexにある１つのelementを消してpdateditemを入れる。
+        items.splice(index, 1, updatedItem);
+      }
+    });
+    localStorage.setItem('items', JSON.stringify(items));
     }
   }
 })();
@@ -361,6 +371,10 @@ const itemUpdateSubmit = function(e){
   const  totalCalories = ItemCtrl.getTotalCalories();
   //Add totalt calories to UI
   UICtrl.showTotalCalories(totalCalories);
+
+ //update local storage
+ StorageCtrl.updateItemStorage(updatedItem);
+
   UICtrl.clearEditState();
   e.preventDefault();
 }
