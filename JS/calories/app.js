@@ -4,7 +4,7 @@ const StorageCtrl = (function(){
   //Pubic method
   return {
     storeItem: function(item){
-      let items = [];
+      let items;
       //Check if any items in ls
       if(localStorage.getItem('items') === null){
         items = [];
@@ -14,11 +14,20 @@ const StorageCtrl = (function(){
         localStorage.setItem('items', JSON.stringify(items));
       }else {
         //LSにすでにあるものを取り出す。
-        items = JSON.parse(localStorage.getItems('items'));
+        items = JSON.parse(localStorage.getItem('items'));
         //push new item
         items.push(item);
         localStorage.setItem('items', JSON.stringify(items));
       }
+    },
+    getItemsFromStorage: function(){
+      let items;
+      if(localStorage.getItem('items') === null){
+        items = [];
+      } else {
+        items = JSON.parse(localStorage.getItem('items'));
+      }
+      return items;
     }
   }
 })();
@@ -33,11 +42,12 @@ const ItemCtrl = (function(){
     }
 
     const data  = {
-      items: [
-        // {id:0, name: 'Steak dinner', calories:1200},
-        // {id:1, name: 'Sushi', calories:500},
-        // {id:2, name: 'Gyoza', calories:600}
-      ],
+      // items: [
+      //   // {id:0, name: 'Steak dinner', calories:1200},
+      //   // {id:1, name: 'Sushi', calories:500},
+      //   // {id:2, name: 'Gyoza', calories:600}
+      // ],
+      items: StorageCtrl.getItemsFromStorage(),
       currentItem: null,
       totalCalories: 0
     }
