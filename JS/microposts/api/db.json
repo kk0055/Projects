@@ -22,6 +22,16 @@
       "title": "post four",
       "body": "post four",
       "id": 5
+    },
+    {
+      "title": "post one",
+      "body": "post one",
+      "id": 6
+    },
+    {
+      "title": "postsContainer",
+      "body": "postsContainer",
+      "id": 7
     }
   ]
 }
