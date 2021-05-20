@@ -26,23 +26,42 @@ function getPosts() {
 function submitPost() {
  const title = document.querySelector('#title').value;
  const body = document.querySelector('#body').value;
+ const id = document.querySelector('#id').value;
+
+ const data = {
+  title,
+  body
+}
+
 
  if (title ===''  || body ==='') {
    ui.showAlert('Please fill in all fields', 'alert alert-danger')
  } else {
-  const data = {
-    title,
-    body
-  }
- 
+
+   //Check ID
+   if(id === '') {
   //create Post
   http.post('http://localhost:3000/posts',data)
-   .then(data => {
-     ui.showAlert('Post added','alert alert-success');
-     ui.clearFields();
-     getPosts();
-   })
-   .catch(err => console.log(err));
+  .then(data => {
+    ui.showAlert('Post added','alert alert-success');
+    ui.clearFields();
+    getPosts();
+  })
+  .catch(err => console.log(err));
+   }else {
+
+
+  //Update Post
+  http.put(`http://localhost:3000/posts/${id}`,data)
+  .then(data => {
+    ui.showAlert('Post added','alert alert-success');
+    ui.changeFormState('add');
+    getPosts();
+  })
+  .catch(err => console.log(err));
+   }
+
+
  }
 }
 
