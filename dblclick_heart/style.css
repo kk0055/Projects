@@ -5,8 +5,8 @@
 }
 
 body {
-  background-color: #686de0;
-  color:#fff;
+  background-color: white;
+  color:black;
   font-family: 'Roboto', sans-serif;
   text-align: center;
   overflow: hidden;
@@ -47,7 +47,7 @@ small {
 
 @keyframes grow {
   to{
-    transform: translate(-50%, -50%) scale(00);
+    transform: translate(-50%, -50%) scale(10);
     opacity: 0;
   }
 }
