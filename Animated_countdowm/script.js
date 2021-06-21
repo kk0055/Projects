@@ -5,7 +5,6 @@ const reply = document.querySelector('#reply')
 
 runAnimation()
 
-window.setInterval(runAnimation(), 5000);
 
 function resetDOM() {
   counter.classList.remove('hide')
@@ -28,9 +27,13 @@ function runAnimation() {
          num.classList.add('out')
       } else if (e.animationName === 'goOut' && num.nextElementSibling) {
         num.nextElementSibling.classList.add('in')
+        
       }
+
+     
     })
   })
+  
 }
 
 replay.addEventListener('click', () => {
