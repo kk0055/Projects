@@ -33,7 +33,7 @@ function runAnimation() {
       } else {
         counter.classList.add('hide')
       
-        setTimeout(resetDOM,1000) 
+        setTimeout(resetDOM,1100) 
       }
     })
   })
