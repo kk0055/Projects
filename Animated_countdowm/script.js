@@ -5,6 +5,8 @@ const reply = document.querySelector('#reply')
 
 runAnimation()
 
+window.setInterval(runAnimation(), 5000);
+
 function resetDOM() {
   counter.classList.remove('hide')
   finalMessage.classList.remove('show')
@@ -21,14 +23,11 @@ function runAnimation() {
     const nextToLast = nums.length - 1
 
     num.addEventListener('animationend', (e) => {
-      if(e.animationName === 'goIn' && idx !== nextToLast) {
+      if(e.animationName === 'goIn'  && idx !== nextToLast ) {
          num.classList.remove('in')
          num.classList.add('out')
       } else if (e.animationName === 'goOut' && num.nextElementSibling) {
         num.nextElementSibling.classList.add('in')
-      }else {
-        counter.classList.add('hide')
-        finalMessage.classList.add('show')
       }
     })
   })
@@ -38,3 +37,12 @@ replay.addEventListener('click', () => {
   resetDOM()
   runAnimation()
 })
+
+
+// var fn = function() {
+
+//   i++;
+// };
+// var tm = 10000;
+// var i = 1;
+// setInterval(fn,tm);
