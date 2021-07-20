@@ -16,12 +16,13 @@ username.addEventListener('keyup', () => {
 
 saveHighScore = (e) => {
     e.preventDefault();
-    
+
     const score = {
       score: mostRecentScore,
       name: username.value,
   };
   highScores.push(score);
+  //b.scoreがa.scoreより高い場合、bをaの前に入れる
   highScores.sort((a, b) => b.score - a.score);
   highScores.splice(5);
 
