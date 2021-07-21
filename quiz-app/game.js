@@ -14,7 +14,7 @@ let availableQuesions = [];
 
 let questions = [];
 //questions.jsonからfetch
- fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')
+ fetch('https://opentdb.com/api.php?amount=50&category=18&difficulty=medium&type=multiple')
  .then((res) => {
   return res.json();
 })
@@ -26,6 +26,8 @@ let questions = [];
       const formattedQuestion = {
         question: loadedQuestion.question,
       };
+
+    
       //answerChoices
       const answerChoices  = [...loadedQuestion.incorrect_answers];
       formattedQuestion.answer = Math.floor(Math.random() *4) + 1;
@@ -100,11 +102,13 @@ choices.forEach(choice => {
     if (classToApply === "correct") {
       incrementScore(CORRECT_BONUS);
     }
-    correctAnser.innerText = currentQuestion.answer     
+    correctAnser.innerText = currentQuestion.answer
+    console.log(currentQuestion)     
     selectedChoice.parentElement.classList.add(classToApply);
     
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
+      correctAnser.innerText = '' 
       getNewQuestion();
     }, 1000);
   });
