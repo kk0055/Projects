@@ -3,6 +3,8 @@ const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
+const loader = document.getElementById('loader');
+const game = document.getElementById('game');
 let currentQuestion = {};
 let acceptingAnswers = false;
 let score = 0;
@@ -11,7 +13,7 @@ let availableQuesions = [];
 
 let questions = [];
 //questions.jsonからfetch
- fetch('https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple')
+ fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')
  .then((res) => {
   return res.json();
 })
@@ -46,13 +48,15 @@ let questions = [];
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 10;
 
 startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuesions = [...questions];
   getNewQuestion();
+  game.classList.remove('hidden');
+  loader.classList.add('hidden');
 };
 
 getNewQuestion = () => {
