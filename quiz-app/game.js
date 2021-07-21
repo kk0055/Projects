@@ -4,6 +4,7 @@ const progressText = document.getElementById("progressText");
 const scoreText = document.getElementById("score");
 const progressBarFull = document.getElementById("progressBarFull");
 const loader = document.getElementById('loader');
+const correctAnser = document.getElementById('correctAnser');
 const game = document.getElementById('game');
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -57,6 +58,7 @@ startGame = () => {
   getNewQuestion();
   game.classList.remove('hidden');
   loader.classList.add('hidden');
+ 
 };
 
 getNewQuestion = () => {
@@ -94,13 +96,13 @@ choices.forEach(choice => {
 
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
-
+   
     if (classToApply === "correct") {
       incrementScore(CORRECT_BONUS);
     }
-
+    correctAnser.innerText = currentQuestion.answer     
     selectedChoice.parentElement.classList.add(classToApply);
-
+    
     setTimeout(() => {
       selectedChoice.parentElement.classList.remove(classToApply);
       getNewQuestion();
