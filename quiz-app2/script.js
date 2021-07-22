@@ -47,6 +47,8 @@ let score = 0
 
 loadQuiz()
  function loadQuiz() {
+
+   deselectAnswers()
    //quizDataから何問目を出すか指定
    const currentQuizData = quizData[currentQuiz]
    
@@ -57,3 +59,31 @@ loadQuiz()
    d_text.innerText = currentQuizData.d
  }
 
+//checkを外す
+function deselectAnswers() {
+  answerEls.forEach(answerEl => answerEl.checked = false)
+}
+
+function getSelected() {
+
+  let answer
+answerEls.forEach(answerEl => {
+  if(answerEl.checked) {
+    answer = answerEl.id
+  }
+})
+return answer
+}
+
+submitBtn.addEventListener('click', () => {
+   const answer = getSelected()
+   
+   if(answer) {
+     //答えが正しい時
+      if(answer === quizData[currentQuiz].correct) {
+        score++
+      }
+
+      currentQuiz++
+   }
+})
