@@ -41,3 +41,19 @@ const b_text = document.getElementById('b_text')
 const c_text = document.getElementById('c_text')
 const d_text = document.getElementById('d_text')
 const submitBtn = document.getElementById('submit')
+
+let currentQuiz = 0
+let score = 0
+
+loadQuiz()
+ function loadQuiz() {
+   //quizDataから何問目を出すか指定
+   const currentQuizData = quizData[currentQuiz]
+   
+   questionEl.innerHTML = currentQuizData.question
+   a_text.innerText = currentQuizData.a
+   b_text.innerText = currentQuizData.b
+   c_text.innerText = currentQuizData.c
+   d_text.innerText = currentQuizData.d
+ }
+
