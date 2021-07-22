@@ -66,9 +66,10 @@ function deselectAnswers() {
 
 function getSelected() {
 
-  let answer
+let answer
 answerEls.forEach(answerEl => {
   if(answerEl.checked) {
+    //checkされたidをanswerにいれる
     answer = answerEl.id
   }
 })
@@ -83,7 +84,18 @@ submitBtn.addEventListener('click', () => {
       if(answer === quizData[currentQuiz].correct) {
         score++
       }
-
+      //次の問題へ
       currentQuiz++
+
+      //quizDataがなくなるまでループ
+      if(currentQuiz < quizData.length) {
+        loadQuiz()
+     
+         }    else {
+          quiz.innerHTML =  `
+          <h2>You answered ${score}/${quizData.length} questions correctly</h2>
+          <button onclick="location.reload()">Reload</button>
+      `
+      }
    }
 })
