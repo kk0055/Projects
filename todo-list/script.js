@@ -14,7 +14,25 @@ function addTodo(todo)
 
    if(todo) {
      todoText = todo.text
-    
    }
-   console.log(todoText)
+
+    if(todoText) {
+      const todoEl = document.createElement('li')
+      if (todo && todo.completed) {
+        todoEl.classList.add('completed')
+      }
+      todoEl.innerHTML = todoText
+      //ひだりクリックならcompletedクラスをtoggle
+      todoEl.addEventListener('click' , () => todoEl.classList.toggle('completed'))
+
+      //右クリックの場合はremove
+      todoEl.addEventListener('contextmenu' , (e) => {
+        e.preventDefault()
+        todoEl.remove() 
+      })
+      todosUL.appendChild(todoEl)
+
+      input.value = ''
+
+    }
 }
