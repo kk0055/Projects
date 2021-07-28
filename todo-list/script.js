@@ -59,5 +59,6 @@ function updateLS() {
        completed: todoEl.classList.contains('completed')
      })
   })
+  //文字列に変更
  localStorage.setItem('todos', JSON.stringify(todos))
 }
