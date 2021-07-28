@@ -2,6 +2,13 @@ const form = document.getElementById('form')
 const input = document.getElementById('input')
 const todosUL = document.getElementById('todos')
 
+//localStorageからget
+const todos = JSON.parse(localStorage.getItem('todos'))
+
+if(todos) {
+  todos.forEach(todo => addTodo(todo))
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -23,16 +30,34 @@ function addTodo(todo)
       }
       todoEl.innerHTML = todoText
       //ひだりクリックならcompletedクラスをtoggle
-      todoEl.addEventListener('click' , () => todoEl.classList.toggle('completed'))
+      todoEl.addEventListener('click' , () => {todoEl.classList.toggle('completed')
+      updateLS()
+    })
 
       //右クリックの場合はremove
       todoEl.addEventListener('contextmenu' , (e) => {
         e.preventDefault()
         todoEl.remove() 
+        updateLS()
       })
       todosUL.appendChild(todoEl)
 
       input.value = ''
-
+      updateLS()
     }
+}
+
+function updateLS() {
+  todosEl = document.querySelectorAll('li')
+
+  const todos = []
+
+  todosEl.forEach(todoEl => {
+     todos.push({
+       text: todoEl.innerText,
+       //completedを含むかどうか判定
+       completed: todoEl.classList.contains('completed')
+     })
+  })
+ localStorage.setItem('todos', JSON.stringify(todos))
 }
