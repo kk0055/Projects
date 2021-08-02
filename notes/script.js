@@ -59,7 +59,7 @@ function updateLs() {
 
   notesText.forEach(note => notes.push(note.value))
 
-  console.log(notes)
+  // console.log(notes)
 
   localStorage.setItem('notes', JSON.stringify(notes))
 }
