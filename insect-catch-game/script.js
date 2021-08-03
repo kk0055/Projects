@@ -5,6 +5,7 @@ const game_container = document.getElementById('game-container')
 const timeEl = document.getElementById('time')
 const scoreEl = document.getElementById('score')
 const message = document.getElementById('message')
+const body = document.getElementById('body')
 
 let seconds = 0
 let score = 0
@@ -37,11 +38,12 @@ function createInsect() {
   insect.addEventListener('click', catchInsect)
   
   game_container.appendChild(insect)
+
 }
 
 function startGame() {
   setInterval(increaseTime, 1000)
- 
+
 }
 
 function increaseTime() {
@@ -52,6 +54,7 @@ function increaseTime() {
   s = s < 10 ? `0${s}` : s
   timeEl.innerHTML = `Time: ${m}:${s}`
   seconds++
+
 }
 
 function getRandomLocation() {
@@ -78,6 +81,12 @@ function addInsects() {
   if(score > 5) {
   setTimeout(createInsect, 500)
   }
+  // if(score > 20) {
+  //   body.style.backgroundColor = "yellow";
+  //   }
+  //   if(score > 30) {
+  //     body.style.backgroundColor = "black";
+  //     }
 }
 
 function increaseScore() {
