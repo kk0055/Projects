@@ -64,5 +64,15 @@ function getRandomLocation() {
 }
 
 function catchInsect() {
-  console.log(123)
+  increaseScore()
+  this.classList.add('caught')
+  setTimeout(() => this.remove(), 200)
+}
+
+function increaseScore() {
+  score++
+  if(score > 19) {
+    message.classList.add('visible')
+  }
+  scoreEl.innerHTML = `Score: ${score}`
 }
