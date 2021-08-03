@@ -33,13 +33,12 @@ function createInsect() {
   const {x,y} = getRandomLocation()
   insect.style.top = `${y}px`
   insect.style.left = `${x}px`
-  insect.innerHTML = `<img src="${selected_insect.src}" alt="${selected_insect.alt}" style="transform: rotate(${Math.random() * 360}deg)" />`
+  insect.innerHTML = `<img src="${selected_insect.src}" alt="${selected_insect.alt}" style="transform: rotate(${Math.random() * 360}deg) " />`
 
   insect.addEventListener('click', catchInsect)
   
   game_container.appendChild(insect)
  
-
 }
 
 function startGame() {
@@ -82,6 +81,11 @@ function addInsects() {
   if(score > 10) {
   setTimeout(createInsect, 500)
   }
+  // if(score == 5) {
+  //   console.log(clearBtn)
+  //   setTimeout(clearBtn, 500)
+    
+  // }
   // if(score > 20) {
   //   body.style.backgroundColor = "yellow";
   //   }
@@ -99,15 +103,19 @@ function increaseScore() {
 }
 
 function clearBtn() {
-  const insect = document.createElement('div')
- 
- 
+  const killer = document.createElement('div')
+  killer.classList.add('killer')
   const {x,y} = getRandomLocation()
-  insect.style.top = `${y}px`
-  insect.style.left = `${x}px`
-  insect.innerHTML = `<img src="${selected_insect.src}" alt="${selected_insect.alt}" style="transform: rotate(${Math.random() * 360}deg)" />`
+  killer.style.top = `${y}px`
+  killer.style.left = `${x}px`
+  killer.innerHTML = `<img src="http://pngimg.com/uploads/moon/moon_PNG23.png" alt="alt" style="transform: rotate(${Math.random() * 360}deg)" />`
 
-  insect.addEventListener('click', catchInsect)
+  killer.addEventListener('click', clearInsect)
 
-  game_container.appendChild(insect)
+  game_container.appendChild(killer)
+}
+
+function clearInsect() {
+  screens[2].innerHTML = "";
+ createInsect()
 }
