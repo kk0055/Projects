@@ -81,11 +81,12 @@ function addInsects() {
   if(score > 10) {
   setTimeout(createInsect, 500)
   }
-  // if(score == 5) {
-  //   console.log(clearBtn)
-  //   setTimeout(clearBtn, 500)
-    
-  // }
+  if(score == 5 || score == 20) {
+    console.log(clearBtn)
+    setTimeout(clearBtn, 500)
+  }
+  
+  
   // if(score > 20) {
   //   body.style.backgroundColor = "yellow";
   //   }
@@ -116,6 +117,7 @@ function clearBtn() {
 }
 
 function clearInsect() {
-  screens[2].innerHTML = "";
+  game_container.innerHTML = "";
+
  createInsect()
 }
