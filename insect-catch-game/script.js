@@ -81,7 +81,22 @@ function addInsects() {
   if(score > 10) {
   setTimeout(createInsect, 500)
   }
-  if(score == 5 || score == 20) {
+
+  if(score > 20) {
+    setTimeout(createInsect, 50)
+    setTimeout(createInsect, 600)
+    setTimeout(createInsect, 900)
+    }
+
+    if(score > 50) {
+      setTimeout(createInsect, 50)
+      setTimeout(createInsect, 600)
+      setTimeout(createInsect, 700)
+      setTimeout(createInsect, 800)
+      setTimeout(createInsect, 900)
+      }  
+  var randnum = Math.floor( Math.random() * 100 );
+  if(score == randnum || score == 50 || score == 80 || score == 150) {
     console.log(clearBtn)
     setTimeout(clearBtn, 500)
   }
