@@ -96,7 +96,8 @@ function addInsects() {
       setTimeout(createInsect, 900)
       }  
   var randnum = Math.floor( Math.random() * 100 );
-  if(score == randnum || score == 50 || score == 80 || score == 150) {
+  if(score == randnum || score == 40 || score == 80 || score == 120
+    || score == 140) {
     console.log(clearBtn)
     setTimeout(clearBtn, 500)
   }
