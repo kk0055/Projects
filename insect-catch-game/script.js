@@ -17,7 +17,8 @@ start_btn.addEventListener('click', () => screens[0].classList.add('up'))
 choose_insect_btns.forEach(btn =>{
   btn.addEventListener('click', () => {
     const img = btn.querySelector('img')
-    const src = img.getAttribute('alt')
+    const src = img.getAttribute('src')
+    const alt = img.getAttribute('alt')
     selected_insect = {src, alt}
     screens[1].classList.add('up')
     setTimeout(createInsect, 1000)
@@ -33,13 +34,35 @@ function createInsect() {
   insect.style.left = `${x}px`
   insect.innerHTML = `<img src="${selected_insect.src}" alt="${selected_insect.alt}" style="transform: rotate(${Math.random() * 360}deg)" />`
 
+  insect.addEventListener('click', catchInsect)
+  
+  game_container.appendChild(insect)
 }
 
+function startGame() {
+  setInterval(increaseTime, 1000)
+}
+
+function increaseTime() {
+  let m = Math.floor(seconds/60)
+  let s = seconds % 60
+
+  m = m < 10 ? `0${m}` : m
+  s = s < 10 ? `0${s}` : s
+  timeEl.innerHTML = `Time: ${m}:${s}`
+  seconds++
+}
 
 function getRandomLocation() {
+  //コンテンツを表示する領域の幅
   const width = window.innerWidth
+  //コンテンツを表示する領域の高さ
   const height = window.innerHeight
   const x = Math.random() * (width - 200) + 100
   const y = Math.random() * (height - 200) + 100
   return {x, y}
+}
+
+function catchInsect() {
+  console.log(123)
 }
