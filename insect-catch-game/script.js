@@ -41,6 +41,7 @@ function createInsect() {
 
 function startGame() {
   setInterval(increaseTime, 1000)
+ 
 }
 
 function increaseTime() {
@@ -66,20 +67,24 @@ function getRandomLocation() {
 function catchInsect() {
   increaseScore()
   this.classList.add('caught')
-  setTimeout(() => this.remove(), 200)
+  setTimeout(() => this.remove(), 2000)
   addInsects()
 }
 
 function addInsects() {
   setTimeout(createInsect, 1000)
   setTimeout(createInsect, 1500)
+
+  if(score > 5) {
+  setTimeout(createInsect, 500)
+  }
 }
 
 function increaseScore() {
   score++
-  if(score > 19) {
-    message.classList.add('visible')
-  }
+  // if(score > 19) {
+  //   message.classList.add('visible')
+  // }
   scoreEl.innerHTML = `Score: ${score}`
 }
 
