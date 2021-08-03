@@ -38,6 +38,7 @@ function createInsect() {
   insect.addEventListener('click', catchInsect)
   
   game_container.appendChild(insect)
+ 
 
 }
 
@@ -78,7 +79,7 @@ function addInsects() {
   setTimeout(createInsect, 1000)
   setTimeout(createInsect, 1500)
 
-  if(score > 5) {
+  if(score > 10) {
   setTimeout(createInsect, 500)
   }
   // if(score > 20) {
@@ -97,3 +98,16 @@ function increaseScore() {
   scoreEl.innerHTML = `Score: ${score}`
 }
 
+function clearBtn() {
+  const insect = document.createElement('div')
+ 
+ 
+  const {x,y} = getRandomLocation()
+  insect.style.top = `${y}px`
+  insect.style.left = `${x}px`
+  insect.innerHTML = `<img src="${selected_insect.src}" alt="${selected_insect.alt}" style="transform: rotate(${Math.random() * 360}deg)" />`
+
+  insect.addEventListener('click', catchInsect)
+
+  game_container.appendChild(insect)
+}
