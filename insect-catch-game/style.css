@@ -93,6 +93,7 @@ h1 {
 
 .game-container {
   position: relative;
+  
 }
 
 .time,
@@ -110,8 +111,8 @@ h1 {
   display: none;
 }
 .reload{
-  right: 20px;
-  margin-top:20px;
+  top: 30px;
+  margin-top:30px;
 }
 
 .message {

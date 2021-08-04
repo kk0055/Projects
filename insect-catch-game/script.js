@@ -62,9 +62,13 @@ function getRandomLocation() {
   const width = window.innerWidth
   //コンテンツを表示する領域の高さ
   const height = window.innerHeight
-  const x = Math.random() * (width - 200) + 100
-  const y = Math.random() * (height - 200) + 100
+  // const x = Math.random() * (width - 200) + 100
+  // const y = Math.random() * (height - 200) + 100
+  const x = Math.random() * (width ) 
+  const y = Math.random() * (height) 
+  
   return {x, y}
+ 
 }
 
 function catchInsect() {
@@ -96,9 +100,9 @@ function addInsects() {
       setTimeout(createInsect, 900)
       }  
   var randnum = Math.floor( Math.random() * 100 );
-  if(score == randnum || score == 40 || score == 80 || score == 120
+  if(score == randnum || score == 30 || score == 80 || score == 120
     || score == 140) {
-    console.log(clearBtn)
+    console.log(score)
     setTimeout(clearBtn, 500)
   }
   
