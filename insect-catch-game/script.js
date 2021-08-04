@@ -59,12 +59,13 @@ function increaseTime() {
 
 function getRandomLocation() {
   //コンテンツを表示する領域の幅
-  const width = window.innerWidth
+  const width = screen.width
   //コンテンツを表示する領域の高さ
   const height = window.innerHeight
-  const x = Math.random() * (width - 200) + 100
+  const x = Math.random() * (width ) 
   const y = Math.random() * (height -200) + 100
-  // const x = Math.random() * (width ) 
+  const x = Math.random() * (width ) 
+  // const x = Math.random() * (width - 200) + 100
   // const y = Math.random() * (height) 
   
   return {x, y}
