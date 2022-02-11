@@ -43,10 +43,21 @@ function createPost(post) {
 //   .then(getPosts)
 //   .catch(error => console.log(error))
 
+async function init() {
+  await createPost(  {
+    title: "Post two",
+    body: "This is post two"
+  });
 
-const promise1 = Promise.resolve('Hello World');
-const promise2 = 10;
-const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, "goode bye"));
-const promise4 = fetch('https://jsonplaceholder.typicode.com/users/').then(res => res.json())
+  getPosts();
+}
 
-Promise.all([promise1, promise2, promise3, promise4]).then((val) => console.log(val));
+init()
+
+
+// const promise1 = Promise.resolve('Hello World');
+// const promise2 = 10;
+// const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, "goode bye"));
+// const promise4 = fetch('https://jsonplaceholder.typicode.com/users/').then(res => res.json())
+
+// Promise.all([promise1, promise2, promise3, promise4]).then((val) => console.log(val));
