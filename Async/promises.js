@@ -43,18 +43,25 @@ function createPost(post) {
 //   .then(getPosts)
 //   .catch(error => console.log(error))
 
-async function init() {
-  await createPost(  {
-    title: "Post two",
-    body: "This is post two"
-  });
+// async function init() {
+//   await createPost(  {
+//     title: "Post two",
+//     body: "This is post two"
+//   });
 
-  getPosts();
+//   getPosts();
+// }
+
+// init()
+
+async function fetchUsers(){
+  const res = await fetch('https://jsonplaceholder.typicode.com/users/')
+
+  const data  = await res.json();
+  console.log(data);
 }
 
-init()
-
-
+fetchUsers()
 // const promise1 = Promise.resolve('Hello World');
 // const promise2 = 10;
 // const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, "goode bye"));
