@@ -33,19 +33,23 @@ const characters = [{
 const names = characters.map(character =>
   character.name
 )
-console.log(names)
+// console.log(names)
+
 //2. Get array of all heights
 const heights = characters.map(character => character.height)
-console.log(heights)
+// console.log(heights)
+
 //3. Get array of objects with just name and height properties
 const minifiedRecords = characters.map(character => ({
   name: character.name,
   height: character.height
 }))
-console.log(minifiedRecords)
+// console.log(minifiedRecords)
+
 //4. Get array of all first names
 const firstNames  = characters.map(character => character.name.split(" ")[0])
 console.log(firstNames)
+
 //***REDUCE***
 //1. Get total mass of all characters
 //2. Get total height of all characters
@@ -54,9 +58,24 @@ console.log(firstNames)
 
 //***FILTER***
 //1. Get characters with mass greater than 100
+const greater100Characters = characters.filter( character => 
+   character.mass > 100
+)
+console.log(greater100Characters)
+
 //2. Get characters with height less than 200
+const shorterCharacters = characters.filter( character => 
+  character.height < 200
+)
+console.log(shorterCharacters)
+
 //3. Get all male characters
+const maleCharacters = characters.filter(character => character.gender == 'male')
+console.log(maleCharacters)
+
 //4. Get all female characters
+const femaleCharacters = characters.filter(character => character.gender == 'female')
+console.log(femaleCharacters)
 
 //***SORT***
 //1. Sort by mass
