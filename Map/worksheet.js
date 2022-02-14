@@ -113,6 +113,18 @@ const femaleCharacters = characters.filter(character => character.gender == 'fem
 
 //***SOME***
 //1. Is there at least one male character?
+const oneMaleCharacter = characters.some((character) => {
+  return character.gender == 'male'
+})
+// console.log(oneMaleCharacter)
+
 //2. Is there at least one character with blue eyes?
+const oneBlueEyes = characters.some((character) => character.eye_color == 'blue')
+// console.log(oneBlueEyes)
+
 //3. Is there at least one character taller than 210?
+const tallerThan219 = characters.some((character) => character.height > 210 )
+// console.log(tallerThan219)
 //4. Is there at least one character that has mass less than 50?
+const oneMassLessThan50 = characters.some((character) => character.mass < 50)
+// console.log(oneMassLessThan50)
