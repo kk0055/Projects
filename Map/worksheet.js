@@ -101,9 +101,29 @@ const femaleCharacters = characters.filter(character => character.gender == 'fem
 
 //***SORT***
 //1. Sort by mass
+const byMass = characters.sort((a,b) => {
+  return a.mass - b.mass
+})
+console.log(byMass)
+
 //2. Sort by height
+const byHeight = characters.sort((a,b) => {
+  return a.height - b.height
+})
+console.log(byHeight)
+
 //3. Sort by name
+const byName = characters.sort((a,b) => {
+  if (a.name < b.name) return 1;
+  return -1
+})
+console.log(byName)
 //4. Sort by gender
+const byGender = characters.sort((a,b) => {
+  if (a.gender =='female') return 1;
+  return -1
+})
+console.log(byGender)
 
 //***EVERY***
 //1. Does every character have blue eyes?
