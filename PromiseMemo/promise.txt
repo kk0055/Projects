@@ -1,0 +1,43 @@
+https://azu.github.io/promises-book/
+
+then の間違った使い方
+function badAsyncCall() {
+    const promise = Promise.resolve();
+    promise.then(() => {
+        // 何かの処理
+        return newVar;
+    });
+    return promise;
+}
+このように書いてしまうと、promise.then の中で例外が発生するとその例外を取得する方法がなくなり、 また、何かの値を返していてもそれを受け取る方法が無くなってしまいます。
+
+これは promise.then によって新たに作られたpromiseオブジェクトを返すようにすることで、 2のようにpromise chainをつなげるようにするべきなので、次のように修正することができます。
+
+then で作成したオブジェクトを返す
+function anAsyncCall() {
+    const promise = Promise.resolve();
+    return promise.then(() => {
+        // 何かの処理
+        return newVar;
+    });
+}
+
+Async Functionは次のように関数の前にasyncをつけることで定義できます。 このdoAsync関数は常にPromiseインスタンスを返します。
+
+async function doAsync() {
+    return "値";
+}
+// doAsync関数はPromiseを返す
+doAsync().then((value) => {
+    console.log(value); // => "値"
+});
+Run
+Async Functionではreturnした値の代わりに、Promise.resolve(返り値)のように返り値をラップしたPromiseインスタンスを返します。 そのため、このAsync Functionは次のように書いた場合と同じ意味になります。
+
+// 通常の関数でPromiseインスタンスを返している
+function doAsync() {
+    return Promise.resolve("値");
+}
+doAsync().then((value) => {
+    console.log(value); // => "値"
+});
