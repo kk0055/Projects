@@ -84,6 +84,9 @@ const ItemCtrl = (function () {
       data.items.splice(index, 1)
       console.log(data.items)
     },
+    clearAllItems: function () {
+      data.items = []
+    },
     setCurrentItem: function (item) {
       data.currentItem = item
     },
@@ -116,6 +119,7 @@ const UICtrl = (function () {
     addBtn: '.add-btn',
     updateBtn: '.update-btn',
     deleteBtn: '.delete-btn',
+    clearBtn: '.clear-btn',
     backBtn: '.back-btn',
     itemNameInput: '#item-name',
     itemCaloriesInput: '#item-calories',
@@ -178,6 +182,14 @@ const UICtrl = (function () {
       const itemID = `#item-${id}`
       document.querySelector(itemID).remove()
     },
+    removeAllItems: function () {
+      let listItems = document.querySelectorAll(UISelectors.listItems)
+      //turn Node list into array
+      listItems = Array.from(listItems);
+      listItems.forEach(function (listItem) {
+        listItem.remove()
+      })
+    },
     clearInput: function () {
       document.querySelector(UISelectors.itemNameInput).value = ''
       document.querySelector(UISelectors.itemCaloriesInput).value = ''
@@ -229,6 +241,8 @@ const App = (function (ItemCtrl, UICtrl) {
     document.querySelector(UISelectors.backBtn).addEventListener('click', UICtrl.clearEditState)
     //Delete item
     document.querySelector(UISelectors.deleteBtn).addEventListener('click', itemDeleteSubmit)
+    //Clear all items
+    document.querySelector(UISelectors.clearBtn).addEventListener('click', clearAllItemsClick)
   }
 
 
@@ -294,6 +308,17 @@ const App = (function (ItemCtrl, UICtrl) {
 
     UICtrl.clearEditState()
     e.preventDefault()
+  }
+
+  const clearAllItemsClick = function () {
+    //Delete all items from data structre
+    ItemCtrl.clearAllItems()
+    //Get Total Calories
+    const totalCalories = ItemCtrl.getTotalCalories()
+    UICtrl.showTotalCalories(totalCalories)
+    UICtrl.removeAllItems()
+    UICtrl.hideList()
+
   }
 
   // Public methods
