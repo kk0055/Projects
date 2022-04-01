@@ -1,4 +1,27 @@
 // Storage Controller
+const StrageCtrl = (function () {
+  //public
+  return {
+    storeItem: function (item) {
+      let items = [];
+   
+      if (localStorage.getItem('items') === null) {
+        items = []
+        items.push(item);
+        //set ls
+        localStorage.setItem('items', JSON.stringify(items));
+      } else {
+        items = JSON.parse(localStorage.getItem('items'))
+
+        //Push new item
+        items.push(item);
+        //Re set 
+        localStorage.setItem('items', JSON.stringify(items));
+
+      }
+    }
+  }
+})();
 
 
 // Item Controller
@@ -221,7 +244,7 @@ const UICtrl = (function () {
 
 
 // App Controller
-const App = (function (ItemCtrl, UICtrl) {
+const App = (function (ItemCtrl, StrageCtrl, UICtrl) {
   const loadEventListeners = function () {
     const UISelectors = UICtrl.getSelectors();
     document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit)
@@ -257,6 +280,8 @@ const App = (function (ItemCtrl, UICtrl) {
       //Get Total Calories
       const totalCalories = ItemCtrl.getTotalCalories()
       UICtrl.showTotalCalories(totalCalories)
+
+      StrageCtrl.storeItem(newItem)
       //Clear fields
       UICtrl.clearInput()
     }
@@ -342,7 +367,7 @@ const App = (function (ItemCtrl, UICtrl) {
     }
   }
 
-})(ItemCtrl, UICtrl);
+})(ItemCtrl, StrageCtrl, UICtrl);
 
 // Initialize App
 App.init();
