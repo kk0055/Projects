@@ -43,14 +43,14 @@ class UI {
 
     setTimeout(() => {
       this.clearAlert()
-    },2000)
+    }, 2000)
   }
   clearAlert() {
-   const currentAlert = document.querySelector('.alert')
+    const currentAlert = document.querySelector('.alert')
 
-   if(currentAlert) {
-    currentAlert.remove()
-   }
+    if (currentAlert) {
+      currentAlert.remove()
+    }
   }
   clearFields() {
     this.titleInput.value = ''
