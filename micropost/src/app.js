@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', getPosts);
 document.querySelector('.post-submit').addEventListener('click', submitPost)
 document.querySelector('#posts').addEventListener('click', deletePost)
 document.querySelector('#posts').addEventListener('click', enableEdit)
+document.querySelector('.card-form').addEventListener('click', cancelEdit)
 
 function getPosts() {
   http.get('http://localhost:3000/posts')
@@ -20,20 +21,42 @@ function getPosts() {
 function submitPost() {
   const title = document.querySelector('#title').value;
   const body = document.querySelector('#body').value;
-
+  const id = document.querySelector('#id').value;
   const data = {
     title,
     body
   }
 
-  //Create post
-  http.post('http://localhost:3000/posts', data)
+  if (title === '' || body === '') {
+    ui.showAlert('Please fill in all fields', 'alert alert-danger')
+  } else {
+    //check for id
+     if(id === '') {
+    //create post
+    http.post('http://localhost:3000/posts', data)
     .then(data => {
       ui.showAlert('Post added', 'alert alert-success')
       ui.clearFields()
       getPosts()
     })
     .catch(err => console.log(err))
+     } else {
+     //update Post
+     http.put(`http://localhost:3000/posts/${id}`, data)
+     .then(data => {
+       ui.showAlert('Post Updated', 'alert alert-success')
+       ui.changeFormState('add')
+       getPosts()
+     })
+     .catch(err => console.log(err))
+     }
+    //Create post
+   
+
+  }
+
+
+
 }
 
 function deletePost(e) {
@@ -73,4 +96,11 @@ function enableEdit(e) {
     //     .catch(err => console.log(err))
     // }
   }
+}
+
+function cancelEdit(e) {
+ if(e.target.classList.contains('post-cancel')) {
+   ui.changeFormState('add')
+ }
+ e.preventDefault();
 }

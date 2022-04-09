@@ -56,6 +56,10 @@ class UI {
     this.titleInput.value = ''
     this.bodyInput.value = ''
   }
+  clearIdInput() {
+    this.idInput.value = ''
+  }
+
   changeFormState(type) {
    if(type === 'edit') {
     this.postSubmit.textContent = 'update Post'
@@ -73,7 +77,13 @@ class UI {
     //Insert
     cardForm.insertBefore(button,formEnd)
    } else {
-     
+    this.postSubmit.textContent = 'Post It'
+    this.postSubmit.className = 'post-submit btn btn-primary btn-block'
+    if(document.querySelector('.post-cancel')) {
+       document.querySelector('.post-cancel').remove()
+    }
+    this.clearIdInput()
+    this.clearFields()
    }
   }
   fillForm(data) {
