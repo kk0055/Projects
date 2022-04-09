@@ -56,6 +56,33 @@ class UI {
     this.titleInput.value = ''
     this.bodyInput.value = ''
   }
+  changeFormState(type) {
+   if(type === 'edit') {
+    this.postSubmit.textContent = 'update Post'
+    this.postSubmit.className = 'post-submit btn btn-warning btn-block'
+
+    //create cxl button
+    const button = document.createElement('button');
+    button.className = 'post-cancel btn btn-light btn-block'
+    button.appendChild(document.createTextNode('cancel Edit'))
+
+    //Get parent
+    const cardForm = document.querySelector('.card-form');
+    //Get element to insert before
+    const formEnd = document.querySelector('.form-end');
+    //Insert
+    cardForm.insertBefore(button,formEnd)
+   } else {
+     
+   }
+  }
+  fillForm(data) {
+    this.titleInput.value = data.title
+    this.bodyInput.value = data.body
+    this.idInput.value = data.id
+
+    this.changeFormState('edit')
+  }
 }
 
 export const ui = new UI();
